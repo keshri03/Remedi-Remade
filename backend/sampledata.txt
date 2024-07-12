@@ -1,0 +1,83 @@
+Users:
+{
+    "username": "johndoe",
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "hashed_password_here1",
+    "phone": "+1234567890",
+    "type": "ngo",
+}
+{
+    "username": "janesmith",
+    "name": "Jane Smith",
+    "email": "janesmith@example.com",
+    "password": "hashed_password_here2",
+    "phone": "+1987654321",
+    "type": "regular"
+}
+
+{
+    "username": "alex_brown",
+    "name": "Alex Brown",
+    "email": "alex.brown@example.com",
+    "password": "hashed_password_here3",
+    "phone": "+1122334455",
+    "type": "ngo",
+}
+{
+    "username": "raman",
+    "name": "raman",
+    "email": "raman.smith@example.com",
+    "password": "hashed_password_here4",
+    "phone": "+1787654321",
+    "type": "regular"
+}
+
+Medicines:
+{
+    "medNameAndStrength": "Aspirin 100mg",
+    "quantityType": "Tablets",
+    "availableQuantity": 100,
+    "totalQuantity": 500,
+    "totalPrice": 50,
+    "totalWorth": 250,
+    "expiryDate": "2024-12-31",
+    "ndc": "1234567890",
+    "username": "raman.smith@example.com",
+    "address": "123 Main St, Cityville",
+    "status": "available",
+    "listDate": "2024-07-12"
+    // "_id": "6690dffce64cff766279e037"
+}
+{
+    "medNameAndStrength": "Paracetamol 500mg",
+    "quantityType": "Capsules",
+    "availableQuantity": 200,
+    "totalQuantity": 1000,
+    "totalPrice": 80,
+    "totalWorth": 400,
+    "expiryDate": "2023-10-15",
+    "ndc": "0987654321",
+    "username": "janesmith@example.com",
+    "address": "456 Oak Ave, Townsville",
+    "status": "available",
+    "listDate": "2024-06-30"
+    //  "_id": "6690dfbde64cff766279e030",
+}
+{
+    "medNameAndStrength": "Amoxicillin 250mg",
+    "quantityType": "Suspension",
+    "availableQuantity": 50,
+    "totalQuantity": 200,
+    "totalPrice": 30,
+    "totalWorth": 150,
+    "expiryDate": "2023-08-20",
+    "ndc": "9876543210",
+    "username": "raman.smith@example.com",
+    "address": "789 Elm Blvd, Villagetown",
+    "status": "available",
+    "listDate": "2024-07-01"
+    //"_id": "6690dffce64cff766279e037",
+
+}
+
