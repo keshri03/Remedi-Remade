@@ -23,8 +23,10 @@ const authenticateUser = async (req, res, next) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        
         // Attach user object to request for further middleware or route handlers
-        req.user = user;
+        // console.log(user);
+        req.userId = decoded.id;
         next(); // Proceed to next middleware or route handler
     } catch (error) {
         console.error('Error authenticating user:', error);
@@ -34,8 +36,8 @@ const authenticateUser = async (req, res, next) => {
 
 
 // Login endpoint
-const generateJwtToken = (email) => {
-    return jwt.sign(email, process.env.JWT_SECRET_KEY); // expires in 30 sec {expiresIn: 3000} agar man ho ye daalne ka
+const generateJwtToken = (payload) => {
+    return jwt.sign(payload, process.env.JWT_SECRET); // expires in 30 sec {expiresIn: 3000} agar man ho ye daalne ka
 }
 
 module.exports = {generateJwtToken,authenticateUser};

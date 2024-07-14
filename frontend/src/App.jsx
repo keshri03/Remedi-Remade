@@ -1,35 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
+import SignIn from "./Pages/SignIn"
+import User from "./Pages/User"; // Adjust the import paths as necessary
+import Ngo from "./Pages/Ngo"; // Adjust the import paths as necessary
+import About from "./Pages/About";
+import Homepage from "./Pages/Homepage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/user" element={<User />} />
+      <Route path="/ngo" element={<Ngo/>} /> // Dynamic route for
+      <Route path="/about" element={<About />} /> // Dynamic route for
+      <Route path="/home" element={<Homepage />} />
+    </Routes>
+  );
 }
 
-export default App
+
+export default App;

@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    phone: { type: String, required: true },
+    phone: { type: Number, required: true },
     totalPriceDonated: { type: Number, default: 0 },
     level: { type: Number, default: 1 },
     type: { type: String, required: true },
