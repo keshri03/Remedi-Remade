@@ -23,7 +23,7 @@ function UserInfo() {
       }
 
       try {
-        const result = await axios.get(`http://localhost:4000/user/`, {
+        const result = await axios.get(`${Base()}/user/`, {
           headers: {
             Authorization: `Bearer ${token}`, // Include the token in the request headers
           },
