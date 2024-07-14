@@ -9,8 +9,8 @@ const cors = require("cors");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const corsOptions = {
-  // origin: "https://remedi-frontend.onrender.com",
-  origin: "http://localhost:5173",
+  origin: "https://remedi-frontend.onrender.com",
+  //origin: "http://localhost:5173",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
