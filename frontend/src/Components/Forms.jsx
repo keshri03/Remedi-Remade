@@ -45,7 +45,7 @@ export const Forms = ({id}) => {
     console.log(user_data);
     try {
       const response = await axios.post(
-        `http://localhost:4000/medicine`,
+        `${Base()}/medicine`,
         user_data,
         {
           headers: {
