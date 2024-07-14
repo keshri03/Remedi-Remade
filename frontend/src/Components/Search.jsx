@@ -23,7 +23,7 @@ export const Search = () => {
     setFoundMeds([]);
 
     try {
-      const response = await axios.get(`http://localhost:4000/getMedicine`, {
+      const response = await axios.get(`${Base()}/getMedicine`, {
         params: { name: query, category: category }, // Include category in search
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the Authorization header
@@ -48,7 +48,7 @@ export const Search = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:4000/allmedicines`, {
+      const response = await axios.get(`${Base()}/allmedicines`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the Authorization header
         },
@@ -73,7 +73,7 @@ export const Search = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/collect`,
+        `${Base()}/collect`,
         user_data,
         {
           headers: {
