@@ -3,7 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const db = require("./db");
 const Medicine = require("./models/medicine");
-const User = require("./models/User");
+const User = require("./models/user");
+
 const cors = require("cors");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
