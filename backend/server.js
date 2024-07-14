@@ -9,7 +9,8 @@ const cors = require("cors");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const corsOptions = {
-  origin: "https://remedi-frontend.onrender.com",
+  // origin: "https://remedi-frontend.onrender.com",
+  origin: "http://localhost:5173",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -107,7 +108,7 @@ app.post("/login", async (req, res) => {
       id: user._id,
     };
     const token = generateJwtToken(payload);
-    // console.log(user);
+    console.log(user);
     return res
       .status(200)
       .json({
@@ -244,10 +245,10 @@ app.get("/allmedicines", authenticateUser, async (req, res) => {
   }
 });
 
-app.get("/getMedicine", authenticateUser,async (req, res) => {
-  console.log("request aaya");
+app.get("/getMedicine", authenticateUser, async (req, res) => {
+  // console.log("request aaya");
   try {
-    const {name, category } = req.query;
+    const { name, category } = req.query;
     // console.log(req.query);
 
     // If both query and category are not provided
@@ -256,9 +257,9 @@ app.get("/getMedicine", authenticateUser,async (req, res) => {
     }
 
     const filter = {};
-    if (name) filter.medNameAndStrength = { $regex: new RegExp(name, 'i') }; // Case-insensitive search
+    if (name) filter.medNameAndStrength = { $regex: new RegExp(name, 'i') }; // Case-insensitive substring search
+    
     if (category) filter.quantityType = category; // Filter by category
-    // console.log(req.query);
 
     const foundMeds = await Medicine.find(filter);
     // console.log(foundMeds);
@@ -277,6 +278,7 @@ app.get("/getMedicine", authenticateUser,async (req, res) => {
     });
   }
 });
+
 
 
 

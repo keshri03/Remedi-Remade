@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import axios from "axios";
 import "../Styles/Forms.css";
 import { useNavigate } from "react-router-dom";
@@ -16,14 +16,15 @@ export const Forms = ({id}) => {
   const [ndc, setNdc] = useState("");
   const [address, setAddress] = useState("");
   const [image, imageUpload ] = useState("");
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("token"); // Retrieve the token from local storage
+    const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/signin"); // Navigate to /signin if no token is found
-      return; // Exit early
+      navigate("/signin");
+      return;
     }
 
     const user_data = {
@@ -32,7 +33,7 @@ export const Forms = ({id}) => {
       availableQuantity,
       totalQuantity,
       totalPrice,
-      totalWorth: (availableQuantity * totalPrice) / totalQuantity,
+      totalWorth: Math.floor((availableQuantity * totalPrice) / totalQuantity),
       expiryDate,
       ndc,
       username: localStorage.getItem("username"),
@@ -43,22 +44,35 @@ export const Forms = ({id}) => {
 
     console.log(user_data);
     try {
-      const response = await axios.post(`${Base()}/medicine`, user_data, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the request headers
-        },
-      });
-      console.log(response.data);
+      const response = await axios.post(
+        `http://localhost:4000/medicine`,
+        user_data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       if (response.data.success) {
         localStorage.setItem("username", response.data.userDetails.username);
-        navigate(`/user`);
+        setFormSubmitted(true); // Set form submission state to true
       }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+
+  useEffect(() => {
+    if (formSubmitted) {
+      window.scrollTo(0, 0); // Scroll to the top
+      navigate(`/user`); // Navigate to the user page
+      setFormSubmitted(false); // Reset form submission state
+    }
+  }, [formSubmitted, navigate]);
+
   return (
-    <div className="form-container " id="donate">
+    <div className="form-container" id="donate">
       <h1 className="text-white text-4xl text-center ">ENTER MEDICINE DETAILS</h1>
       <form  className="flex flex-row items-center m-auto">
         <div className="contleft ml-12">
@@ -164,7 +178,7 @@ export const Forms = ({id}) => {
           <datalist id="datalistOptions">
             <option value="Pill" />
             <option value="Inhaler" />
-            <option value="Injects" />
+            <option value="Injection" />
             <option value="Syrup" />
             <option value="Patches" />
             <option value="Tubes" />

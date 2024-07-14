@@ -4,7 +4,6 @@ import "../Styles/Search.css";
 import { useNavigate } from "react-router-dom"; // For React Router v6
 import Base from "../base";
 
-
 export const Search = () => {
   const [typeSearch, setTypeSearch] = useState(false);
   const [query, setQuery] = useState("");
@@ -13,54 +12,55 @@ export const Search = () => {
   const [category, setCategory] = useState(""); // State for category selection
   const navigate = useNavigate();
 
- const handleSearch = async () => {
-   const token = localStorage.getItem("token"); // Get the token from local storage
+  const handleSearch = async () => {
+    const token = localStorage.getItem("token"); // Get the token from local storage
 
-   if (!token) {
-     navigate("/signin");
-     return; // Exit the function
-   }
+    if (!token) {
+      navigate("/signin");
+      return; // Exit the function
+    }
 
-   try {
-     const response = await axios.get(`${Base()}/getMedicine`, {
-       params: { query: query, category: category }, // Include category in search
-       headers: {
-         Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-       },
-     });
-     console.log(response.data);
-     setFoundMeds([]);
-     setFoundMeds(response.data.foundMeds);
-     setTypeSearch(false);
-   } catch (error) {
-     console.error("Error fetching medicines:", error);
-   }
- };
+    setFoundMeds([]);
 
+    try {
+      const response = await axios.get(`http://localhost:4000/getMedicine`, {
+        params: { name: query, category: category }, // Include category in search
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
+      });
+      console.log(response.data);
 
- const handleSearchAll = async () => {
-   const token = localStorage.getItem("token"); // Get the token from local storage
+      setFoundMeds(response.data.foundMeds);
+      setTypeSearch(false);
+    } catch (error) {
+      console.error("Error fetching medicines:", error);
+    }
+  };
 
-   if (!token) {
-     navigate("/signin"); t
-     return; // Exit the function
-   }
+  const handleSearchAll = async () => {
+    const token = localStorage.getItem("token"); // Get the token from local storage
+    setFoundMeds([]);
+    if (!token) {
+      navigate("/signin");
+      t;
+      return; // Exit the function
+    }
 
-   try {
-     const response = await axios.get(`${Base()}/allmedicines`, {
-       headers: {
-         Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-       },
-     });
+    try {
+      const response = await axios.get(`http://localhost:4000/allmedicines`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
+      });
 
-     setTypeSearch(true);
-     setFoundMeds([]);
-     setFoundMeds(response.data.medicines);
-   } catch (error) {
-     console.error("Error fetching medicines:", error);
-   }
- };
-
+      setTypeSearch(true);
+      setFoundMeds([]);
+      setFoundMeds(response.data.medicines);
+    } catch (error) {
+      console.error("Error fetching medicines:", error);
+    }
+  };
 
   const handleCollect = async (medId) => {
     const user_data = { id: medId };
@@ -72,11 +72,15 @@ export const Search = () => {
     }
 
     try {
-      const response = await axios.post(`${Base()}/collect`, user_data, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-        },
-      });
+      const response = await axios.post(
+        `http://localhost:4000/collect`,
+        user_data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+        }
+      );
 
       if (typeSearch) await handleSearchAll();
       else await handleSearch();
@@ -84,7 +88,6 @@ export const Search = () => {
       console.error("Error collecting medicine:", error);
     }
   };
-
 
   return (
     <div className="search-container">
@@ -109,7 +112,7 @@ export const Search = () => {
             <option value="Syrup">Syrup</option>
             <option value="Patches">Patches</option>
             <option value="Yubes">Tubes</option>
-            <option value="Tablets">Tablets</option>
+            <option value="Pill">Pill</option>
             <option value="Other">Other</option>
           </select>
           <button
