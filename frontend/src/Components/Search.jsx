@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/Search.css";
 import { useNavigate } from "react-router-dom"; // For React Router v6
+import Base from "../base";
 
 
 export const Search = () => {
@@ -21,7 +22,7 @@ export const Search = () => {
    }
 
    try {
-     const response = await axios.get(`http://localhost:4000/getMedicine`, {
+     const response = await axios.get(`${Base()}/getMedicine`, {
        params: { query: query, category: category }, // Include category in search
        headers: {
          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
@@ -46,7 +47,7 @@ export const Search = () => {
    }
 
    try {
-     const response = await axios.get("http://localhost:4000/allmedicines", {
+     const response = await axios.get(`${Base()}/allmedicines`, {
        headers: {
          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
        },
@@ -71,15 +72,11 @@ export const Search = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/collect",
-        user_data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-          },
-        }
-      );
+      const response = await axios.post(`${Base()}/collect`, user_data, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
+      });
 
       if (typeSearch) await handleSearchAll();
       else await handleSearch();

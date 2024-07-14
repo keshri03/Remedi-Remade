@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/Forms.css";
 import { useNavigate } from "react-router-dom";
+import Base from "../base"
 
 
 
@@ -42,15 +43,11 @@ export const Forms = ({id}) => {
 
     console.log(user_data);
     try {
-      const response = await axios.post(
-        "http://localhost:4000/medicine",
-        user_data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the request headers
-          },
-        }
-      );
+      const response = await axios.post(`${Base()}/medicine`, user_data, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
+        },
+      });
       console.log(response.data);
       if (response.data.success) {
         localStorage.setItem("username", response.data.userDetails.username);

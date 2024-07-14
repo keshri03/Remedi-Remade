@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../Styles/Incentives.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Base from "../base";
 
 export const Incentives = () => {
   const [totalPriceDonated, setTotalPriceDonated] = useState([]);
@@ -19,7 +20,7 @@ export const Incentives = () => {
       }
 
       try {
-        const result = await axios.get(`http://localhost:4000/user`, {
+        const result = await axios.get(`${Base()}/user`, {
           headers: {
             Authorization: `Bearer ${token}`, // Include the token in the request headers
           },

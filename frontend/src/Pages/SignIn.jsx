@@ -4,6 +4,7 @@ import axios from "axios";
 import logo from "../Images/bluel.png";
 import donatepic from "../Images/donatepic.jpg";
 import { useNavigate } from "react-router-dom"; // For React Router v6
+import Base from "../base"
 
 function SignIn() {
   const [show, setShow] = useState("login");
@@ -67,10 +68,7 @@ function SignIn() {
         phone: phone,
       };
 
-      const response = await axios.post(
-        "http://localhost:4000/register",
-        user_data
-      );
+      const response = await axios.post(`${Base()}/register`, user_data);
       if (response.data.success) {
         const { token } = response.data;
         const userId = response.data.user._id; // Extract the user ID from the response
@@ -108,10 +106,7 @@ function SignIn() {
         email: email,
         password: password,
       };
-      const response = await axios.post(
-        "http://localhost:4000/login",
-        user_data
-      );
+      const response = await axios.post(`${Base()}/login`, user_data);
       // console.log(response);
 
       if (response.data.success) {
