@@ -55,7 +55,7 @@ function UserInfo() {
 
           <button
             className="btn btn-primary text-white bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-6 text-xl transition-all duration-300 ease-in-out shadow-lg animate-bounce"
-            
+            onClick={() => goToViolation}
           >
             Donate Now
           </button>
