@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('./models/User'); // Assuming your User model is defined here
+const User = require('./models/user'); // Assuming your User model is defined here
 
 const authenticateUser = async (req, res, next) => {
     // Check if Authorization header is present
